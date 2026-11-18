@@ -32,7 +32,7 @@ Juntar em um só lugar os relatos de problemas de rua, organizados por tipo, bai
 - HTML5 semântico
 - CSS3 em arquivo externo: Flexbox, Grid e media queries
 - JavaScript puro, em 3 arquivos separados por responsabilidade
-- [Bootstrap 5.3.3](https://getbootstrap.com/) via CDN, só na seção "Como funciona" da página inicial (grid e cards)
+- [Bootstrap 5.3.3](https://getbootstrap.com/) via CDN, só na seção "Como funciona" da página inicial (grid)
 - Git e GitHub
 
 ## Como executar
@@ -44,7 +44,7 @@ Juntar em um só lugar os relatos de problemas de rua, organizados por tipo, bai
 2. Abra a pasta `zelabairro` no VS Code.
 3. Clique com o botão direito em `index.html` e escolha **Open with Live Server** (extensão Live Server).
 
-Também funciona abrindo o `index.html` direto no navegador. O Bootstrap vem da internet: sem conexão, só a seção "Como funciona" perde o estilo dos cards.
+Também funciona abrindo o `index.html` direto no navegador. O Bootstrap vem da internet: sem conexão, só a seção "Como funciona" perde o alinhamento em colunas.
 
 ## Estrutura de pastas
 
@@ -60,7 +60,8 @@ zelabairro/
 │   ├── registro.js     # Painel de registro de atividades
 │   └── app.js          # localStorage, adicionar/listar/editar/remover, DOM e eventos
 ├── img/
-│   └── favicon.svg     # Ícone da aba
+│   ├── favicon.svg     # Ícone da aba
+│   └── relatos-celular.png  # Print real da lista, usado na página inicial
 └── docs/
     └── prints/         # Capturas de tela usadas neste README
 ```
