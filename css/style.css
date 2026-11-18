@@ -1,0 +1,520 @@
+/* ==========================================================
+   ZelaBairro - folha de estilos principal
+   Abordagem Mobile First: os estilos base valem para celular.
+   As media queries no final ampliam o layout:
+     - tablet:  a partir de 768px
+     - desktop: a partir de 1024px
+   ========================================================== */
+
+/* ---------- 1. Variáveis (cores e medidas reutilizadas) ---------- */
+:root {
+  --cor-primaria: #0f766e;
+  --cor-primaria-escura: #0b5a54;
+  --cor-destaque: #f59e0b;
+  --cor-fundo: #f4f6f7;
+  --cor-superficie: #ffffff;
+  --cor-texto: #1f2933;
+  --cor-texto-suave: #52606d;
+  --cor-borda: #d9e0e5;
+  --cor-erro: #b42318;
+  --cor-sucesso: #027a48;
+  --raio: 12px;
+  --sombra: 0 1px 3px rgba(16, 24, 40, 0.1);
+}
+
+/* ---------- 2. Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Garante que elementos com o atributo hidden fiquem escondidos,
+   mesmo quando uma classe define display (ex.: .campo e .botao) */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;               /* Flexbox: rodapé sempre no fim da página */
+  flex-direction: column;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--cor-texto);
+}
+
+h1 { font-size: 1.7rem; }
+h2 { font-size: 1.3rem; }
+h3 { font-size: 1.05rem; }
+
+p {
+  margin: 0 0 1rem;
+}
+
+a {
+  color: var(--cor-primaria);
+}
+
+/* Foco bem visível para quem navega pelo teclado (acessibilidade) */
+:focus-visible {
+  outline: 3px solid var(--cor-destaque);
+  outline-offset: 2px;
+}
+
+/* Limita a largura do conteúdo e centraliza na tela */
+.largura-max {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ---------- 3. Cabeçalho e menu (Flexbox) ---------- */
+.cabecalho {
+  background-color: var(--cor-primaria);
+}
+
+.cabecalho-conteudo {
+  display: flex;
+  flex-direction: column;      /* celular: logo em cima, menu embaixo */
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.logo {
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.logo span {
+  color: #99f6e4;
+}
+
+.menu ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu a {
+  display: block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.menu a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Página atual (aria-current="page") fica destacada no menu */
+.menu a[aria-current="page"] {
+  background-color: #ffffff;
+  color: var(--cor-primaria-escura);
+  font-weight: 600;
+}
+
+/* ---------- 4. Conteúdo principal ---------- */
+.conteudo {
+  flex: 1;                     /* ocupa o espaço livre e empurra o rodapé */
+  padding-top: 1.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.secao {
+  margin-top: 2rem;
+}
+
+.subtitulo {
+  color: var(--cor-texto-suave);
+}
+
+.cartao {
+  padding: 1.25rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+  box-shadow: var(--sombra);
+}
+
+/* Bloco de destaque da página inicial */
+.destaque {
+  padding: 2rem 1.25rem;
+  border-radius: var(--raio);
+  background: linear-gradient(135deg, #ccfbf1, #e0f2fe);
+}
+
+.destaque p {
+  max-width: 60ch;
+  font-size: 1.1rem;
+  color: var(--cor-texto-suave);
+}
+
+/* Número do passo nos cards do Bootstrap (página inicial) */
+.passo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 0.75rem;
+  border-radius: 50%;
+  background-color: var(--cor-primaria);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Grade de cards da página Sobre (CSS Grid) */
+.grade {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.grade .cartao p {
+  margin-bottom: 0;
+}
+
+.lista-simples {
+  padding-left: 1.2rem;
+}
+
+.lista-simples li {
+  margin-bottom: 0.5rem;
+}
+
+/* ---------- 5. Botões ---------- */
+.botao {
+  display: inline-block;
+  padding: 0.65rem 1.1rem;
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.botao-primario {
+  background-color: var(--cor-primaria);
+  color: #ffffff;
+}
+
+.botao-primario:hover {
+  background-color: var(--cor-primaria-escura);
+}
+
+.botao-secundario {
+  background-color: #e4ecee;
+  color: var(--cor-texto);
+}
+
+.botao-perigo {
+  background-color: #fde8e7;
+  color: var(--cor-erro);
+}
+
+.botao-pequeno {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.9rem;
+}
+
+/* ---------- 6. Formulário ---------- */
+.formulario {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.linha-campos {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+fieldset.campo {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.campo label,
+.campo legend {
+  font-weight: 600;
+}
+
+.controle {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid #b6c2cc;
+  border-radius: 8px;
+  background-color: #ffffff;
+  font: inherit;
+  color: inherit;
+}
+
+textarea.controle {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+.opcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+}
+
+.opcoes label {
+  font-weight: 400;
+  cursor: pointer;
+}
+
+/* Campo com erro (classe colocada pelo JavaScript) */
+.controle.invalido {
+  border-color: var(--cor-erro);
+  background-color: #fff7f6;
+}
+
+.msg-erro {
+  min-height: 1.25rem;
+  margin: 0;
+  color: var(--cor-erro);
+  font-size: 0.875rem;
+}
+
+.dica {
+  margin: 0;
+  color: var(--cor-texto-suave);
+  font-size: 0.85rem;
+}
+
+.aviso-privacidade {
+  margin: 0;
+  padding: 0.75rem;
+  border-left: 4px solid #0284c7;
+  border-radius: 6px;
+  background-color: #f0f9ff;
+  font-size: 0.875rem;
+}
+
+.mensagem {
+  margin: 0;
+  font-weight: 600;
+}
+
+.mensagem.sucesso {
+  color: var(--cor-sucesso);
+}
+
+.mensagem.erro {
+  color: var(--cor-erro);
+}
+
+.acoes-formulario {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.alerta {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background-color: #fde8e7;
+  color: var(--cor-erro);
+  font-weight: 600;
+}
+
+/* ---------- 7. Página Relatar: layout e lista (CSS Grid) ---------- */
+.layout-relatar {
+  display: grid;
+  grid-template-columns: 1fr;  /* celular: tudo em uma coluna */
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.contador {
+  display: inline-block;
+  min-width: 1.8rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background-color: var(--cor-primaria);
+  color: #ffffff;
+  font-size: 0.9rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.lista-vazia {
+  color: var(--cor-texto-suave);
+  font-style: italic;
+}
+
+.lista-ocorrencias {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ocorrencia {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ocorrencia p {
+  margin: 0;
+}
+
+.ocorrencia-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.ocorrencia-topo h3 {
+  margin: 0;
+}
+
+.ocorrencia-local {
+  font-weight: 600;
+}
+
+.ocorrencia-meta {
+  color: var(--cor-texto-suave);
+  font-size: 0.85rem;
+}
+
+.ocorrencia-acoes {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Etiquetas coloridas de gravidade e status */
+.etiqueta {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.gravidade-baixa { background-color: #dcfce7; color: #166534; }
+.gravidade-media { background-color: #fef3c7; color: #92400e; }
+.gravidade-alta  { background-color: #fee2e2; color: #991b1b; }
+
+.status-aberto    { background-color: #e5e7eb; color: #374151; }
+.status-andamento { background-color: #dbeafe; color: #1e40af; }
+.status-resolvido { background-color: #d1fae5; color: #065f46; }
+
+/* ---------- 8. Registro de atividades ---------- */
+.registro {
+  max-height: 260px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  font-family: ui-monospace, Consolas, "Courier New", monospace;
+  font-size: 0.85rem;
+}
+
+.registro li {
+  padding: 0.4rem 0.25rem;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.registro-sucesso { color: var(--cor-sucesso); }
+.registro-erro    { color: var(--cor-erro); }
+.registro-aviso   { color: var(--cor-texto-suave); }
+
+/* ---------- 9. Rodapé ---------- */
+.rodape {
+  padding: 1.25rem 0;
+  background-color: #0b3b37;
+  color: #cfe7e3;
+  font-size: 0.9rem;
+}
+
+.rodape p {
+  margin: 0;
+}
+
+/* ==========================================================
+   10. TABLET (a partir de 768px)
+   ========================================================== */
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2.1rem;
+  }
+
+  .cabecalho-conteudo {
+    flex-direction: row;               /* logo à esquerda, menu à direita */
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .destaque {
+    padding: 3rem 2.5rem;
+  }
+
+  .linha-campos {
+    grid-template-columns: 1fr 1fr;    /* tipo e bairro lado a lado */
+  }
+
+  .lista-ocorrencias,
+  .grade {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ==========================================================
+   11. DESKTOP (a partir de 1024px)
+   ========================================================== */
+@media (min-width: 1024px) {
+  .layout-relatar {
+    grid-template-columns: 5fr 7fr;    /* formulário à esquerda, lista à direita */
+    align-items: start;
+  }
+
+  .area-formulario {
+    position: sticky;                  /* formulário acompanha a rolagem */
+    top: 1rem;
+  }
+
+  .area-registro {
+    grid-column: 1 / -1;               /* registro ocupa a largura toda */
+  }
+
+  .grade {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
