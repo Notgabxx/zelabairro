@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Relate um problema de zeladoria e acompanhe as ocorrências registradas.">
+  <title>ZelaBairro | Relatar problema</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="cabecalho">
+    <div class="largura-max cabecalho-conteudo">
+      <a class="logo" href="index.html">Zela<span>Bairro</span></a>
+      <nav class="menu" aria-label="Menu principal">
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="relatar.html" aria-current="page">Relatar problema</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="largura-max conteudo">
+    <h1>Relatar um problema</h1>
+    <p class="subtitulo">Preencha o formulário. O relato entra na lista de ocorrências e cada ação aparece no registro de atividades.</p>
+
+    <!-- Alerta para falhas ao carregar/salvar (mensagem simples, sem detalhes técnicos) -->
+    <p id="alerta-sistema" class="alerta" role="alert" hidden></p>
+
+    <div class="layout-relatar">
+      <!-- ========== FORMULÁRIO ========== -->
+      <section class="cartao area-formulario" aria-labelledby="titulo-formulario">
+        <h2 id="titulo-formulario">Novo relato</h2>
+
+        <form id="form-ocorrencia" class="formulario">
+          <div class="linha-campos">
+            <div class="campo">
+              <label for="tipo">Tipo de problema</label>
+              <select id="tipo" name="tipo" class="controle" required aria-describedby="erro-tipo">
+                <option value="">Selecione...</option>
+                <option value="buraco">Buraco na via</option>
+                <option value="iluminacao">Iluminação apagada</option>
+                <option value="lixo">Lixo ou entulho</option>
+                <option value="calcada">Calçada danificada</option>
+                <option value="arvore">Árvore com risco</option>
+                <option value="outro">Outro</option>
+              </select>
+              <p id="erro-tipo" class="msg-erro" aria-live="polite"></p>
+            </div>
+
+            <div class="campo">
+              <label for="bairro">Bairro</label>
+              <input type="text" id="bairro" name="bairro" class="controle"
+                     required minlength="3" maxlength="40" pattern="[A-Za-zÀ-ÿ ]+"
+                     placeholder="Ex.: Centro" autocomplete="off"
+                     aria-describedby="erro-bairro">
+              <p id="erro-bairro" class="msg-erro" aria-live="polite"></p>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label for="local">Local do problema</label>
+            <input type="text" id="local" name="local" class="controle"
+                   required minlength="5" maxlength="100"
+                   placeholder="Ex.: Rua das Flores, em frente à padaria" autocomplete="off"
+                   aria-describedby="dica-local erro-local">
+            <p id="dica-local" class="dica">Informe onde está o problema, não o seu endereço.</p>
+            <p id="erro-local" class="msg-erro" aria-live="polite"></p>
+          </div>
+
+          <div class="campo">
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao" name="descricao" class="controle" rows="4"
+                      required minlength="10" maxlength="300"
+                      placeholder="O que está acontecendo? Desde quando?"
+                      aria-describedby="contador-descricao erro-descricao"></textarea>
+            <p id="contador-descricao" class="dica">0/300 caracteres</p>
+            <p id="erro-descricao" class="msg-erro" aria-live="polite"></p>
+          </div>
+
+          <fieldset class="campo">
+            <legend>Gravidade</legend>
+            <div class="opcoes">
+              <label><input type="radio" name="gravidade" value="baixa" required> Baixa</label>
+              <label><input type="radio" name="gravidade" value="media"> Média</label>
+              <label><input type="radio" name="gravidade" value="alta"> Alta</label>
+            </div>
+            <p id="erro-gravidade" class="msg-erro" aria-live="polite"></p>
+          </fieldset>
+
+          <!-- Só aparece no modo de edição -->
+          <div class="campo" id="campo-status" hidden>
+            <label for="status">Status</label>
+            <select id="status" name="status" class="controle" aria-describedby="erro-status">
+              <option value="aberto">Aberto</option>
+              <option value="andamento">Em andamento</option>
+              <option value="resolvido">Resolvido</option>
+            </select>
+            <p id="erro-status" class="msg-erro" aria-live="polite"></p>
+          </div>
+
+          <p class="aviso-privacidade">
+            <strong>Privacidade (LGPD):</strong> não pedimos nome, CPF, telefone nem e-mail.
+            Não escreva dados pessoais na descrição. Os relatos ficam salvos só neste navegador.
+          </p>
+
+          <p id="mensagem-formulario" class="mensagem" role="status"></p>
+
+          <div class="acoes-formulario">
+            <button type="submit" id="botao-enviar" class="botao botao-primario">Enviar relato</button>
+            <button type="button" id="botao-cancelar" class="botao botao-secundario" hidden>Cancelar edição</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ========== LISTA DE OCORRÊNCIAS ========== -->
+      <section class="area-lista" aria-labelledby="titulo-lista">
+        <h2 id="titulo-lista">Ocorrências registradas <span id="contador-ocorrencias" class="contador">0</span></h2>
+        <p id="lista-vazia" class="lista-vazia">Nenhuma ocorrência ainda. Use o formulário para relatar a primeira.</p>
+        <ul id="lista-ocorrencias" class="lista-ocorrencias"></ul>
+      </section>
+
+      <!-- ========== REGISTRO DE ATIVIDADES ========== -->
+      <section class="cartao area-registro" aria-labelledby="titulo-registro">
+        <h2 id="titulo-registro">Registro de atividades</h2>
+        <ol id="lista-registro" class="registro"></ol>
+      </section>
+    </div>
+  </main>
+
+  <footer class="rodape">
+    <div class="largura-max">
+      <p>ZelaBairro · Protótipo acadêmico de Desenvolvimento Web I · Fatec Diadema · Dados fictícios</p>
+    </div>
+  </footer>
+</body>
+</html>
