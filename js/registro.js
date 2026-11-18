@@ -68,7 +68,7 @@ function renderizarRegistro() {
     const acao = document.createElement("strong");
     acao.textContent = atividade.acao;
 
-    item.append(quando, " — ", acao, `: ${atividade.resultado}`);
+    item.append(quando, " · ", acao, `: ${atividade.resultado}`);
     lista.append(item);
   });
 }

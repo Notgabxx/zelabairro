@@ -111,7 +111,7 @@ function adicionarOcorrencia(dados) {
   salvarOcorrencias();
   renderizarLista();
   limparFormulario();
-  mostrarMensagem("Relato enviado! Obrigado por cuidar do bairro.", "sucesso");
+  mostrarMensagem("Relato registrado. Ele já aparece na lista.", "sucesso");
   registrarAtividade("Adicionar", `ocorrência adicionada com sucesso (${resumoDe(nova)})`);
 }
 
@@ -132,7 +132,7 @@ function renderizarLista() {
  */
 function criarItemDaLista(ocorrencia) {
   const item = document.createElement("li");
-  item.className = "cartao ocorrencia";
+  item.className = `cartao ocorrencia borda-${ocorrencia.gravidade}`; // borda colorida pela gravidade
 
   const topo = document.createElement("div");
   topo.className = "ocorrencia-topo";
@@ -202,7 +202,9 @@ function iniciarEdicao(id) {
   campoStatus.hidden = false;
   limparErros();
   mostrarMensagem("", "");
-  tituloFormulario.scrollIntoView({ behavior: "smooth", block: "start" });
+  // Rolagem suave, a não ser que a pessoa tenha pedido menos movimento no sistema
+  const menosMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  tituloFormulario.scrollIntoView({ behavior: menosMovimento ? "auto" : "smooth", block: "start" });
   formulario.elements.tipo.focus({ preventScroll: true });
   registrarAtividade("Editar", `edição iniciada (${resumoDe(ocorrencia)})`, "aviso");
 }
@@ -266,7 +268,7 @@ function removerOcorrencia(id) {
     registrarAtividade("Remover", "falha: ocorrência não encontrada", "erro");
     return;
   }
-  const confirmou = window.confirm(`Remover o relato "${resumoDe(ocorrencia)}"?`);
+  const confirmou = window.confirm(`Remover o relato “${resumoDe(ocorrencia)}”?`);
   if (!confirmou) {
     registrarAtividade("Remover", "remoção cancelada pelo usuário", "aviso");
     return;
