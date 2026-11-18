@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Relate um problema de zeladoria e acompanhe as ocorrências registradas.">
   <title>ZelaBairro | Relatar problema</title>
+  <meta name="theme-color" content="#141414">
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
   <!-- JavaScript: "defer" executa os arquivos em ordem, depois que o HTML é carregado -->
@@ -15,7 +16,7 @@
 <body>
   <header class="cabecalho">
     <div class="largura-max cabecalho-conteudo">
-      <a class="logo" href="index.html">Zela<span>Bairro</span></a>
+      <a class="logo" href="index.html">ZelaBairro</a>
       <nav class="menu" aria-label="Menu principal">
         <ul>
           <li><a href="index.html">Início</a></li>
@@ -28,7 +29,7 @@
 
   <main class="largura-max conteudo">
     <h1>Relatar um problema</h1>
-    <p class="subtitulo">Preencha o formulário. O relato entra na lista de ocorrências e cada ação aparece no registro de atividades.</p>
+    <p class="subtitulo">Leva cerca de um minuto e não pede nenhum dado pessoal.</p>
 
     <!-- Alerta para falhas ao carregar/salvar (mensagem simples, sem detalhes técnicos) -->
     <p id="alerta-sistema" class="alerta" role="alert" hidden></p>
@@ -43,7 +44,7 @@
             <div class="campo">
               <label for="tipo">Tipo de problema</label>
               <select id="tipo" name="tipo" class="controle" required aria-describedby="erro-tipo">
-                <option value="">Selecione...</option>
+                <option value="">Selecione…</option>
                 <option value="buraco">Buraco na via</option>
                 <option value="iluminacao">Iluminação apagada</option>
                 <option value="lixo">Lixo ou entulho</option>

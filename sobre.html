@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Para quem é o ZelaBairro, ODS relacionados, modelo de negócio e privacidade.">
+  <meta name="theme-color" content="#141414">
   <title>ZelaBairro | Sobre</title>
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
@@ -11,7 +12,7 @@
 <body>
   <header class="cabecalho">
     <div class="largura-max cabecalho-conteudo">
-      <a class="logo" href="index.html">Zela<span>Bairro</span></a>
+      <a class="logo" href="index.html">ZelaBairro</a>
       <nav class="menu" aria-label="Menu principal">
         <ul>
           <li><a href="index.html">Início</a></li>
@@ -24,43 +25,59 @@
 
   <main class="largura-max conteudo">
     <h1>Sobre o ZelaBairro</h1>
+    <p class="subtitulo">Protótipo de zeladoria colaborativa para Diadema (SP): o morador relata, acompanha e ajuda a prefeitura a priorizar.</p>
 
-    <section class="secao" aria-labelledby="titulo-cidadao">
+    <section class="secao texto" aria-labelledby="titulo-cidadao">
       <h2 id="titulo-cidadao">Para quem é</h2>
-      <p>Para moradores de Diadema (SP) que andam a pé, de bicicleta ou de ônibus e convivem com buracos, postes apagados, lixo acumulado e calçadas quebradas. Esses problemas aumentam o risco de quedas e acidentes e a sensação de insegurança, principalmente para idosos, pessoas com deficiência e quem volta para casa à noite.</p>
+      <p>Para moradores de Diadema que andam a pé, de bicicleta ou de ônibus e convivem com buracos, postes apagados, lixo acumulado e calçadas quebradas. Esses problemas aumentam o risco de quedas e acidentes e a sensação de insegurança, principalmente para idosos, pessoas com deficiência e quem volta para casa à noite.</p>
       <p>A demanda existe: em 2025, as ouvidorias públicas do Grande ABC receberam 45.758 mensagens, 40% a mais que em 2024, com zeladoria e iluminação pública entre as principais reclamações
         (<a href="https://www.dgabc.com.br/Noticia/4284094/procura-por-ouvidorias-publicas-registra-alta-de-40-em-um-ano-no-grande-abc" target="_blank" rel="noopener noreferrer">Diário do Grande ABC</a>).</p>
     </section>
 
     <section class="secao" aria-labelledby="titulo-ods">
       <h2 id="titulo-ods">Objetivos de Desenvolvimento Sustentável (ODS)</h2>
-      <div class="grade">
-        <article class="cartao">
-          <h3>ODS 11 · Cidades sustentáveis</h3>
+      <ul class="lista-ods">
+        <li class="ods-11">
+          <span class="ods-numero">ODS 11</span>
+          <h3>Cidades sustentáveis</h3>
           <p>Espaços públicos mais seguros e acessíveis, com os moradores participando da manutenção do bairro.</p>
-        </article>
-        <article class="cartao">
-          <h3>ODS 9 · Infraestrutura</h3>
+        </li>
+        <li class="ods-9">
+          <span class="ods-numero">ODS 9</span>
+          <h3>Infraestrutura</h3>
           <p>Relatos organizados por tipo, bairro e gravidade ajudam a planejar a manutenção de vias, calçadas e iluminação.</p>
-        </article>
-        <article class="cartao">
-          <h3>ODS 16 · Instituições eficazes</h3>
+        </li>
+        <li class="ods-16">
+          <span class="ods-numero">ODS 16</span>
+          <h3>Instituições eficazes</h3>
           <p>Relatos que podem ser acompanhados aproximam o cidadão da prefeitura e permitem cobrar resultados.</p>
-        </article>
-      </div>
+        </li>
+      </ul>
     </section>
 
     <section class="secao" aria-labelledby="titulo-negocio">
       <h2 id="titulo-negocio">Como se sustenta (negócio de impacto)</h2>
-      <ul class="lista-simples">
-        <li><strong>Gratuito para o cidadão:</strong> relatar e acompanhar não custa nada e não exige cadastro.</li>
-        <li><strong>Assinatura para prefeituras:</strong> painel de gestão com prioridades, prazos e relatórios por bairro, cobrado por mês conforme o porte da cidade.</li>
-        <li><strong>Parcerias locais:</strong> associações de bairro e comércios ajudam na divulgação e podem patrocinar mutirões de zeladoria.</li>
-        <li><strong>Escala:</strong> o mesmo sistema serve para qualquer cidade; basta cadastrar os bairros e os tipos de serviço.</li>
-      </ul>
+      <dl class="lista-definicoes">
+        <div>
+          <dt>Gratuito para o cidadão</dt>
+          <dd>Relatar e acompanhar não custa nada e não exige cadastro.</dd>
+        </div>
+        <div>
+          <dt>Assinatura para prefeituras</dt>
+          <dd>Painel de gestão com prioridades, prazos e relatórios por bairro, cobrado por mês conforme o porte da cidade.</dd>
+        </div>
+        <div>
+          <dt>Parcerias locais</dt>
+          <dd>Associações de bairro e comércios ajudam na divulgação e podem patrocinar mutirões de zeladoria.</dd>
+        </div>
+        <div>
+          <dt>Escala</dt>
+          <dd>O mesmo sistema serve para qualquer cidade; basta cadastrar os bairros e os tipos de serviço.</dd>
+        </div>
+      </dl>
     </section>
 
-    <section class="secao" aria-labelledby="titulo-privacidade">
+    <section class="secao texto" aria-labelledby="titulo-privacidade">
       <h2 id="titulo-privacidade">Privacidade (LGPD)</h2>
       <p>O ZelaBairro coleta só o necessário para resolver o problema: tipo, bairro, local, descrição e gravidade. Não há campos de nome, CPF, telefone ou e-mail. Neste protótipo, os dados ficam salvos apenas no seu navegador (localStorage) e todos os exemplos são fictícios.</p>
     </section>

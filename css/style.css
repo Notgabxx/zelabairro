@@ -1,5 +1,6 @@
 /* ==========================================================
    ZelaBairro - folha de estilos principal
+   Visual: preto e branco com o amarelo das placas de sinalização.
    Abordagem Mobile First: os estilos base valem para celular.
    As media queries no final ampliam o layout:
      - tablet:  a partir de 768px
@@ -8,18 +9,18 @@
 
 /* ---------- 1. Variáveis (cores e medidas reutilizadas) ---------- */
 :root {
-  --cor-primaria: #0f766e;
-  --cor-primaria-escura: #0b5a54;
-  --cor-destaque: #f59e0b;
-  --cor-fundo: #f4f6f7;
-  --cor-superficie: #ffffff;
-  --cor-texto: #1f2933;
-  --cor-texto-suave: #52606d;
-  --cor-borda: #d9e0e5;
-  --cor-erro: #b42318;
-  --cor-sucesso: #027a48;
-  --raio: 12px;
-  --sombra: 0 1px 3px rgba(16, 24, 40, 0.1);
+  color-scheme: light;
+  --tinta: #141414;          /* quase preto: textos e fundos fortes */
+  --texto-suave: #5c5c58;    /* textos secundários */
+  --papel: #ffffff;          /* superfícies (formulário, itens da lista) */
+  --fundo: #f5f5f1;          /* fundo da página */
+  --linha: #e0e0da;          /* bordas leves */
+  --linha-forte: #85857f;    /* borda dos campos (contraste mínimo de 3:1) */
+  --sinal: #ffd100;          /* amarelo de sinalização */
+  --erro: #b3261e;
+  --sucesso: #1d7a3a;
+  --info: #1f5fbf;
+  --raio: 4px;
 }
 
 /* ---------- 2. Base ---------- */
@@ -42,36 +43,60 @@ body {
   flex-direction: column;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   font-size: 1rem;
-  line-height: 1.5;
-  color: var(--cor-texto);
-  background-color: var(--cor-fundo);
+  line-height: 1.55;
+  color: var(--tinta);
+  background-color: var(--fundo);
+  -webkit-font-smoothing: antialiased;
 }
 
 h1,
 h2,
 h3 {
   margin: 0 0 0.5rem;
-  line-height: 1.2;
-  font-weight: 700;
-  color: var(--cor-texto);
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.02em;     /* títulos mais "fechados", com mais presença */
+  color: var(--tinta);
+  text-wrap: balance;          /* quebra as linhas do título de forma equilibrada */
 }
 
-h1 { font-size: 1.7rem; }
-h2 { font-size: 1.3rem; }
-h3 { font-size: 1.05rem; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.35rem; }
+h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
 
 p {
   margin: 0 0 1rem;
 }
 
 a {
-  color: var(--cor-primaria);
+  color: var(--tinta);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Tira o atraso de toque duplo no celular */
+a,
+button,
+input,
+select,
+textarea,
+label {
+  touch-action: manipulation;
 }
 
 /* Foco bem visível para quem navega pelo teclado (acessibilidade) */
 :focus-visible {
-  outline: 3px solid var(--cor-destaque);
+  outline: 3px solid var(--tinta);
   outline-offset: 2px;
+}
+
+/* Ao seguir um link #âncora, o título não fica colado no topo */
+[id] {
+  scroll-margin-top: 1rem;
 }
 
 /* Limita a largura do conteúdo e centraliza na tela */
@@ -82,34 +107,53 @@ a {
   padding: 0 1rem;
 }
 
+/* Linhas de texto com largura confortável de leitura */
+.texto {
+  max-width: 65ch;
+}
+
 /* ---------- 3. Cabeçalho e menu (Flexbox) ---------- */
 .cabecalho {
-  background-color: var(--cor-primaria);
+  background-color: var(--tinta);
+}
+
+/* Faixa zebrada amarela e preta, como as de sinalização de obra */
+.cabecalho::after {
+  content: "";
+  display: block;
+  height: 6px;
+  background: repeating-linear-gradient(-45deg, var(--sinal) 0 10px, var(--tinta) 10px 20px);
 }
 
 .cabecalho-conteudo {
   display: flex;
   flex-direction: column;      /* celular: logo em cima, menu embaixo */
-  gap: 0.5rem;
   padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   color: #ffffff;
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   font-weight: 800;
+  letter-spacing: -0.02em;
   text-decoration: none;
 }
 
-.logo span {
-  color: #99f6e4;
+/* Quadradinho amarelo antes do nome, como uma placa */
+.logo::before {
+  content: "";
+  width: 0.85rem;
+  height: 0.85rem;
+  background-color: var(--sinal);
 }
 
 .menu ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem;
+  gap: 0 1.25rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -117,143 +161,269 @@ a {
 
 .menu a {
   display: block;
-  padding: 0.4rem 0.8rem;
-  border-radius: 999px;
+  padding: 0.65rem 0;          /* área de toque com cerca de 44px de altura */
   color: #ffffff;
   text-decoration: none;
 }
 
 .menu a:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
-/* Página atual (aria-current="page") fica destacada no menu */
+/* Página atual (aria-current="page"): traço amarelo embaixo */
 .menu a[aria-current="page"] {
-  background-color: #ffffff;
-  color: var(--cor-primaria-escura);
-  font-weight: 600;
+  font-weight: 700;
+  box-shadow: inset 0 -3px 0 var(--sinal);
+}
+
+/* No fundo preto, o contorno de foco fica amarelo */
+.cabecalho :focus-visible {
+  outline-color: var(--sinal);
 }
 
 /* ---------- 4. Conteúdo principal ---------- */
 .conteudo {
   flex: 1;                     /* ocupa o espaço livre e empurra o rodapé */
-  padding-top: 1.5rem;
-  padding-bottom: 2.5rem;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
 }
 
 .secao {
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
 
 .subtitulo {
-  color: var(--cor-texto-suave);
+  max-width: 60ch;
+  color: var(--texto-suave);
+  font-size: 1.05rem;
 }
 
 .cartao {
   padding: 1.25rem;
-  border: 1px solid var(--cor-borda);
+  border: 1px solid var(--linha);
   border-radius: var(--raio);
-  background-color: var(--cor-superficie);
-  box-shadow: var(--sombra);
+  background-color: var(--papel);
 }
 
-/* Bloco de destaque da página inicial */
-.destaque {
-  padding: 2rem 1.25rem;
-  border-radius: var(--raio);
-  background: linear-gradient(135deg, #ccfbf1, #e0f2fe);
-}
-
-.destaque p {
-  max-width: 60ch;
-  font-size: 1.1rem;
-  color: var(--cor-texto-suave);
-}
-
-/* Número do passo nos cards do Bootstrap (página inicial) */
-.passo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  margin-bottom: 0.75rem;
-  border-radius: 50%;
-  background-color: var(--cor-primaria);
-  color: #ffffff;
+.link-forte {
   font-weight: 700;
 }
 
-/* Grade de cards da página Sobre (CSS Grid) */
-.grade {
+/* ---------- 5. Página inicial ---------- */
+.heroi {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 2rem;
+  padding: 0.5rem 0 2.5rem;
+  border-bottom: 1px solid var(--linha);
 }
 
-.grade .cartao p {
-  margin-bottom: 0;
+.heroi h1 {
+  font-size: 2.4rem;
 }
 
-.lista-simples {
-  padding-left: 1.2rem;
+.heroi-lide {
+  max-width: 46ch;
+  color: var(--texto-suave);
+  font-size: 1.15rem;
 }
 
-.lista-simples li {
-  margin-bottom: 0.5rem;
+.heroi-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
 }
 
-/* ---------- 5. Botões ---------- */
-.botao {
-  display: inline-block;
-  padding: 0.65rem 1.1rem;
-  border: 0;
-  border-radius: 8px;
-  font: inherit;
+/* Quadro com borda grossa, lembrando uma placa */
+.placa {
+  padding: 1.25rem 1.5rem 0.75rem;
+  border: 2px solid var(--tinta);
+  background-color: var(--papel);
+}
+
+.placa h2 {
+  font-size: 1.05rem;
+}
+
+.placa ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.placa li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0;
+  border-top: 1px solid var(--linha);
   font-weight: 600;
+}
+
+.placa li::before {
+  content: "";
+  flex-shrink: 0;
+  width: 0.6rem;
+  height: 0.6rem;
+  background-color: var(--sinal);
+  outline: 1px solid var(--tinta);
+}
+
+.problema {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* Número em destaque com a fonte do dado */
+.numero {
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 6px solid var(--sinal);
+  color: var(--texto-suave);
+}
+
+.numero strong {
+  display: block;
+  color: var(--tinta);
+  font-size: 3.25rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Cards do Bootstrap ("Como funciona") seguindo as cores do site */
+.card {
+  color: var(--tinta);
+}
+
+.card-text {
+  color: var(--texto-suave);
+}
+
+/* ---------- 6. Página Sobre ---------- */
+.lista-ods {
+  display: grid;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lista-ods li {
+  padding-top: 0.75rem;
+  border-top: 6px solid var(--tinta);
+}
+
+/* Cores oficiais de cada ODS (ONU) */
+.lista-ods li.ods-9 { border-top-color: #fd6925; }
+.lista-ods li.ods-11 { border-top-color: #fd9d24; }
+.lista-ods li.ods-16 { border-top-color: #00689d; }
+
+.lista-ods p {
+  margin: 0;
+  color: var(--texto-suave);
+}
+
+.ods-numero {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.lista-definicoes {
+  max-width: 70ch;
+  margin: 0;
+}
+
+.lista-definicoes div {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--linha);
+}
+
+.lista-definicoes dt {
+  font-weight: 700;
+}
+
+.lista-definicoes dd {
+  margin: 0;
+  color: var(--texto-suave);
+}
+
+/* ---------- 7. Botões ---------- */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;            /* alvo de toque confortável */
+  padding: 0.6rem 1.2rem;
+  border: 2px solid var(--tinta);
+  border-radius: var(--raio);
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.2;
   text-decoration: none;
   cursor: pointer;
+  transition: background-color 0.12s, color 0.12s;
 }
 
 .botao-primario {
-  background-color: var(--cor-primaria);
-  color: #ffffff;
+  background-color: var(--sinal);
+  color: var(--tinta);
 }
 
 .botao-primario:hover {
-  background-color: var(--cor-primaria-escura);
+  background-color: var(--tinta);
+  color: var(--sinal);
 }
 
 .botao-secundario {
-  background-color: #e4ecee;
-  color: var(--cor-texto);
+  background-color: var(--papel);
+  color: var(--tinta);
+}
+
+.botao-secundario:hover {
+  background-color: var(--fundo);
 }
 
 .botao-perigo {
-  background-color: #fde8e7;
-  color: var(--cor-erro);
+  border-color: var(--erro);
+  background-color: var(--papel);
+  color: var(--erro);
+}
+
+.botao-perigo:hover {
+  background-color: #fdecea;
 }
 
 .botao-pequeno {
-  padding: 0.35rem 0.75rem;
+  min-height: 40px;
+  padding: 0.35rem 0.85rem;
+  border-width: 1.5px;
   font-size: 0.9rem;
 }
 
-/* ---------- 6. Formulário ---------- */
+/* ---------- 8. Formulário ---------- */
 .formulario {
   display: grid;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .linha-campos {
   display: grid;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .campo {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.35rem;
   min-width: 0;
 }
 
@@ -265,74 +435,97 @@ fieldset.campo {
 
 .campo label,
 .campo legend {
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 700;
 }
 
 .controle {
   width: 100%;
-  padding: 0.6rem 0.7rem;
-  border: 1px solid #b6c2cc;
-  border-radius: 8px;
-  background-color: #ffffff;
+  min-height: 44px;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--linha-forte);
+  border-radius: var(--raio);
+  background-color: var(--papel);
   font: inherit;
   color: inherit;
 }
 
+/* Foco do campo: contorno preto com uma "aura" amarela */
+.controle:focus-visible {
+  outline: 2px solid var(--tinta);
+  outline-offset: 0;
+  box-shadow: 0 0 0 5px var(--sinal);
+}
+
 textarea.controle {
-  min-height: 6rem;
+  min-height: 7rem;
   resize: vertical;
 }
 
 .opcoes {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 1.25rem;
+  gap: 0 1.5rem;
 }
 
 .opcoes label {
-  font-weight: 400;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;            /* o texto também é área de clique */
+  font-weight: 500;
   cursor: pointer;
 }
 
-/* Campo com erro (classe colocada pelo JavaScript) */
+.opcoes input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: 0;
+  accent-color: var(--tinta);
+}
+
+/* Campo com erro (classe colocada pelo JavaScript).
+   O box-shadow engrossa a borda sem mudar o tamanho do campo. */
 .controle.invalido {
-  border-color: var(--cor-erro);
-  background-color: #fff7f6;
+  border-color: var(--erro);
+  box-shadow: inset 0 0 0 1px var(--erro);
+  background-color: #fff8f7;
 }
 
 .msg-erro {
-  min-height: 1.25rem;
+  min-height: 1.3rem;          /* reserva o espaço: a página não "pula" */
   margin: 0;
-  color: var(--cor-erro);
+  color: var(--erro);
   font-size: 0.875rem;
+  font-weight: 500;
 }
 
 .dica {
   margin: 0;
-  color: var(--cor-texto-suave);
+  color: var(--texto-suave);
   font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .aviso-privacidade {
   margin: 0;
-  padding: 0.75rem;
-  border-left: 4px solid #0284c7;
-  border-radius: 6px;
-  background-color: #f0f9ff;
+  padding: 0.75rem 0.9rem;
+  border-left: 4px solid var(--sinal);
+  background-color: var(--fundo);
   font-size: 0.875rem;
 }
 
 .mensagem {
   margin: 0;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .mensagem.sucesso {
-  color: var(--cor-sucesso);
+  color: var(--sucesso);
 }
 
 .mensagem.erro {
-  color: var(--cor-erro);
+  color: var(--erro);
 }
 
 .acoes-formulario {
@@ -343,35 +536,42 @@ textarea.controle {
 
 .alerta {
   padding: 0.75rem 1rem;
-  border-radius: 8px;
-  background-color: #fde8e7;
-  color: var(--cor-erro);
-  font-weight: 600;
+  border-left: 4px solid var(--erro);
+  background-color: #fdecea;
+  color: var(--erro);
+  font-weight: 700;
 }
 
-/* ---------- 7. Página Relatar: layout e lista (CSS Grid) ---------- */
+/* ---------- 9. Página Relatar: layout e lista (CSS Grid) ---------- */
 .layout-relatar {
   display: grid;
   grid-template-columns: 1fr;  /* celular: tudo em uma coluna */
-  gap: 1.5rem;
-  margin-top: 1rem;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.area-lista h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .contador {
-  display: inline-block;
-  min-width: 1.8rem;
-  padding: 0.1rem 0.5rem;
-  border-radius: 999px;
-  background-color: var(--cor-primaria);
+  min-width: 1.9rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 3px;
+  background-color: var(--tinta);
   color: #ffffff;
   font-size: 0.9rem;
+  letter-spacing: 0;
   text-align: center;
-  vertical-align: middle;
+  font-variant-numeric: tabular-nums;
 }
 
 .lista-vazia {
-  color: var(--cor-texto-suave);
-  font-style: italic;
+  padding: 1.25rem;
+  border: 1px dashed var(--linha-forte);
+  color: var(--texto-suave);
 }
 
 .lista-ocorrencias {
@@ -387,7 +587,12 @@ textarea.controle {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  border-left-width: 5px;      /* a cor vem da gravidade (classes borda-*) */
 }
+
+.borda-baixa { border-left-color: #1d7a3a; }
+.borda-media { border-left-color: #e0a100; }
+.borda-alta { border-left-color: #b3261e; }
 
 .ocorrencia p {
   margin: 0;
@@ -396,13 +601,14 @@ textarea.controle {
 .ocorrencia-topo {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 0.25rem 0.75rem;
 }
 
 .ocorrencia-topo h3 {
   margin: 0;
+  font-size: 1.1rem;
 }
 
 .ocorrencia-local {
@@ -410,57 +616,92 @@ textarea.controle {
 }
 
 .ocorrencia-meta {
-  color: var(--cor-texto-suave);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--texto-suave);
   font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .ocorrencia-acoes {
   display: flex;
   gap: 0.5rem;
+  margin-top: 0.25rem;
 }
 
-/* Etiquetas coloridas de gravidade e status */
+/* Etiquetas de gravidade e de status */
 .etiqueta {
-  display: inline-block;
-  padding: 0.15rem 0.6rem;
-  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
-.gravidade-baixa { background-color: #dcfce7; color: #166534; }
-.gravidade-media { background-color: #fef3c7; color: #92400e; }
-.gravidade-alta  { background-color: #fee2e2; color: #991b1b; }
+/* Gravidade: bolinha colorida + texto (a cor nunca é a única informação) */
+.gravidade-baixa { color: #1d7a3a; }
+.gravidade-media { color: #8a5a00; }
+.gravidade-alta { color: #b3261e; }
 
-.status-aberto    { background-color: #e5e7eb; color: #374151; }
-.status-andamento { background-color: #dbeafe; color: #1e40af; }
-.status-resolvido { background-color: #d1fae5; color: #065f46; }
+.gravidade-baixa::before,
+.gravidade-media::before,
+.gravidade-alta::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background-color: currentColor;
+}
 
-/* ---------- 8. Registro de atividades ---------- */
+/* Status: selo com borda, em letras maiúsculas pequenas */
+.status-aberto,
+.status-andamento,
+.status-resolvido {
+  padding: 0.1rem 0.45rem;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.status-aberto { color: var(--texto-suave); }
+.status-andamento { color: var(--info); }
+.status-resolvido { color: var(--sucesso); }
+
+/* ---------- 10. Registro de atividades ---------- */
 .registro {
-  max-height: 260px;
+  max-height: 280px;
   margin: 0;
   padding: 0;
   overflow-y: auto;
   list-style: none;
-  font-family: ui-monospace, Consolas, "Courier New", monospace;
-  font-size: 0.85rem;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .registro li {
-  padding: 0.4rem 0.25rem;
-  border-bottom: 1px solid var(--cor-borda);
+  padding: 0.45rem 0;
+  border-bottom: 1px dotted var(--linha-forte);
 }
 
-.registro-sucesso { color: var(--cor-sucesso); }
-.registro-erro    { color: var(--cor-erro); }
-.registro-aviso   { color: var(--cor-texto-suave); }
+.registro time {
+  color: var(--texto-suave);
+}
 
-/* ---------- 9. Rodapé ---------- */
+.registro-sucesso { color: var(--sucesso); }
+.registro-erro { color: var(--erro); }
+.registro-aviso { color: var(--texto-suave); }
+
+/* ---------- 11. Rodapé ---------- */
 .rodape {
-  padding: 1.25rem 0;
-  background-color: #0b3b37;
-  color: #cfe7e3;
+  padding: 1.5rem 0;
+  background-color: var(--tinta);
+  color: #c9c9c3;
   font-size: 0.9rem;
 }
 
@@ -468,38 +709,72 @@ textarea.controle {
   margin: 0;
 }
 
+/* Quem pede menos movimento no sistema não recebe transições */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* ==========================================================
-   10. TABLET (a partir de 768px)
+   12. TABLET (a partir de 768px)
    ========================================================== */
 @media (min-width: 768px) {
   h1 {
-    font-size: 2.1rem;
+    font-size: 2.6rem;
   }
 
   .cabecalho-conteudo {
     flex-direction: row;               /* logo à esquerda, menu à direita */
     align-items: center;
     justify-content: space-between;
+    padding-top: 0;
   }
 
-  .destaque {
-    padding: 3rem 2.5rem;
+  .heroi h1 {
+    font-size: 3.2rem;
   }
 
   .linha-campos {
     grid-template-columns: 1fr 1fr;    /* tipo e bairro lado a lado */
   }
 
-  .lista-ocorrencias,
-  .grade {
+  .lista-ocorrencias {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lista-ods {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .lista-definicoes div {
+    grid-template-columns: 15rem 1fr;  /* termo à esquerda, explicação à direita */
+    gap: 1.5rem;
   }
 }
 
 /* ==========================================================
-   11. DESKTOP (a partir de 1024px)
+   13. DESKTOP (a partir de 1024px)
    ========================================================== */
 @media (min-width: 1024px) {
+  .heroi {
+    grid-template-columns: 7fr 4fr;    /* texto maior à esquerda, placa à direita */
+    align-items: end;
+    gap: 3rem;
+    padding: 2rem 0 3.5rem;
+  }
+
+  .heroi h1 {
+    font-size: 3.6rem;
+  }
+
+  .problema {
+    grid-template-columns: 7fr 4fr;
+    align-items: start;
+    gap: 3rem;
+  }
+
   .layout-relatar {
     grid-template-columns: 5fr 7fr;    /* formulário à esquerda, lista à direita */
     align-items: start;
@@ -512,9 +787,5 @@ textarea.controle {
 
   .area-registro {
     grid-column: 1 / -1;               /* registro ocupa a largura toda */
-  }
-
-  .grade {
-    grid-template-columns: repeat(3, 1fr);
   }
 }

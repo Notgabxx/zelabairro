@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="ZelaBairro: relate problemas de zeladoria do seu bairro e acompanhe a solução.">
+  <meta name="theme-color" content="#141414">
   <title>ZelaBairro | Início</title>
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 
@@ -20,7 +21,7 @@
 <body>
   <header class="cabecalho">
     <div class="largura-max cabecalho-conteudo">
-      <a class="logo" href="index.html">Zela<span>Bairro</span></a>
+      <a class="logo" href="index.html">ZelaBairro</a>
       <nav class="menu" aria-label="Menu principal">
         <ul>
           <li><a href="index.html" aria-current="page">Início</a></li>
@@ -32,45 +33,67 @@
   </header>
 
   <main class="largura-max conteudo">
-    <section class="destaque" aria-labelledby="titulo-principal">
-      <h1 id="titulo-principal">Viu um problema no seu bairro? Relate em 1 minuto.</h1>
-      <p>Buraco na rua, poste apagado, lixo acumulado, calçada quebrada: registre o problema, acompanhe o andamento e ajude a prefeitura a saber o que resolver primeiro.</p>
-      <a class="botao botao-primario" href="relatar.html">Relatar um problema</a>
+    <section class="heroi" aria-labelledby="titulo-principal">
+      <div>
+        <h1 id="titulo-principal">O que está quebrado no seu bairro?</h1>
+        <p class="heroi-lide">Buraco na rua, poste apagado, entulho na calçada. Registre aqui, acompanhe o status e ajude a prefeitura a decidir o que resolver primeiro.</p>
+        <div class="heroi-acoes">
+          <a class="botao botao-primario" href="relatar.html">Relatar um problema</a>
+          <a class="link-forte" href="relatar.html#titulo-lista">Ver relatos registrados <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <aside class="placa" aria-labelledby="titulo-tipos">
+        <h2 id="titulo-tipos">O que dá para relatar</h2>
+        <ul>
+          <li>Buraco na via</li>
+          <li>Iluminação apagada</li>
+          <li>Lixo ou entulho</li>
+          <li>Calçada danificada</li>
+          <li>Árvore com risco</li>
+        </ul>
+      </aside>
     </section>
 
-    <section class="secao" aria-labelledby="titulo-problema">
-      <h2 id="titulo-problema">O problema</h2>
-      <p>Quem encontra um problema na rua costuma reclamar em grupos de WhatsApp ou nas redes sociais. Esses relatos se perdem, chegam repetidos ou incompletos à prefeitura, e o morador não sabe se alguém está cuidando do caso.</p>
-      <p>O ZelaBairro junta os relatos em um só lugar, organizados por tipo, bairro e gravidade, sem exigir cadastro.</p>
+    <section class="secao problema" aria-labelledby="titulo-problema">
+      <div class="texto">
+        <h2 id="titulo-problema">O problema</h2>
+        <p>Quem encontra um problema na rua costuma reclamar em grupos de WhatsApp ou nas redes sociais. Esses relatos se perdem, chegam repetidos ou incompletos à prefeitura, e o morador não sabe se alguém está cuidando do caso.</p>
+        <p>O ZelaBairro junta os relatos em um só lugar, organizados por tipo, bairro e gravidade, sem exigir cadastro.</p>
+      </div>
+      <p class="numero">
+        <strong>+40%</strong>
+        de mensagens às ouvidorias públicas do Grande ABC em 2025, comparado a 2024. Zeladoria e iluminação estão entre as principais reclamações
+        (<a href="https://www.dgabc.com.br/Noticia/4284094/procura-por-ouvidorias-publicas-registra-alta-de-40-em-um-ano-no-grande-abc" target="_blank" rel="noopener noreferrer">Diário do Grande ABC</a>).
+      </p>
     </section>
 
     <section class="secao" aria-labelledby="titulo-como-funciona">
       <h2 id="titulo-como-funciona">Como funciona</h2>
 
-      <!-- Seção feita com Bootstrap: grid responsivo (row/col) + componente card -->
-      <div class="row g-3">
+      <!-- Seção feita com Bootstrap: grid responsivo (row/col) + componente card.
+           Os utilitários border-0, border-top, border-4, border-dark e rounded-0
+           deixam cada card só com um traço preto no topo. -->
+      <div class="row g-4">
         <div class="col-12 col-md-4">
-          <article class="card h-100 shadow-sm">
-            <div class="card-body">
-              <span class="passo" aria-hidden="true">1</span>
+          <article class="card h-100 border-0 border-top border-4 border-dark rounded-0 bg-transparent">
+            <div class="card-body px-0">
               <h3 class="card-title">Relate</h3>
               <p class="card-text">Escolha o tipo de problema, o bairro e um ponto de referência. Não pedimos nome, CPF nem telefone.</p>
             </div>
           </article>
         </div>
         <div class="col-12 col-md-4">
-          <article class="card h-100 shadow-sm">
-            <div class="card-body">
-              <span class="passo" aria-hidden="true">2</span>
+          <article class="card h-100 border-0 border-top border-4 border-dark rounded-0 bg-transparent">
+            <div class="card-body px-0">
               <h3 class="card-title">Acompanhe</h3>
-              <p class="card-text">Cada relato tem um status: aberto, em andamento ou resolvido. Dá para editar ou remover quando precisar.</p>
+              <p class="card-text">Cada relato mostra o status: aberto, em andamento ou resolvido. Dá para editar ou remover quando precisar.</p>
             </div>
           </article>
         </div>
         <div class="col-12 col-md-4">
-          <article class="card h-100 shadow-sm">
-            <div class="card-body">
-              <span class="passo" aria-hidden="true">3</span>
+          <article class="card h-100 border-0 border-top border-4 border-dark rounded-0 bg-transparent">
+            <div class="card-body px-0">
               <h3 class="card-title">Priorize</h3>
               <p class="card-text">A gravidade informada ajuda a prefeitura a decidir o que resolver primeiro, com os relatos organizados por bairro.</p>
             </div>
