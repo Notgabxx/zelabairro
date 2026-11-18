@@ -1,6 +1,8 @@
 /* ==========================================================
    ZelaBairro - folha de estilos principal
    Visual: preto e branco com o amarelo das placas de sinalização.
+   Regras do visual: um único acento (amarelo), um único raio de
+   borda (2px), sem sombras decorativas e sem branco ou preto puros.
    Abordagem Mobile First: os estilos base valem para celular.
    As media queries no final ampliam o layout:
      - tablet:  a partir de 768px
@@ -12,15 +14,16 @@
   color-scheme: light;
   --tinta: #141414;          /* quase preto: textos e fundos fortes */
   --texto-suave: #5c5c58;    /* textos secundários */
-  --papel: #ffffff;          /* superfícies (formulário, itens da lista) */
-  --fundo: #f5f5f1;          /* fundo da página */
-  --linha: #e0e0da;          /* bordas leves */
+  --claro: #fafaf7;          /* texto claro sobre o fundo preto */
+  --papel: #fcfcfa;          /* superfícies (formulário, itens da lista) */
+  --fundo: #f3f3ef;          /* fundo da página */
+  --linha: #dcdcd5;          /* bordas leves */
   --linha-forte: #85857f;    /* borda dos campos (contraste mínimo de 3:1) */
-  --sinal: #ffd100;          /* amarelo de sinalização */
+  --sinal: #ffd100;          /* amarelo de sinalização: o único acento */
   --erro: #b3261e;
   --sucesso: #1d7a3a;
   --info: #1f5fbf;
-  --raio: 4px;
+  --raio: 2px;               /* um único raio de borda no site todo */
 }
 
 /* ---------- 2. Base ---------- */
@@ -39,6 +42,7 @@
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100dvh;          /* altura real da tela no celular */
   display: flex;               /* Flexbox: rodapé sempre no fim da página */
   flex-direction: column;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
@@ -135,7 +139,7 @@ label {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: #ffffff;
+  color: var(--claro);
   font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -162,7 +166,7 @@ label {
 .menu a {
   display: block;
   padding: 0.65rem 0;          /* área de toque com cerca de 44px de altura */
-  color: #ffffff;
+  color: var(--claro);
   text-decoration: none;
 }
 
@@ -219,7 +223,7 @@ label {
 }
 
 .heroi h1 {
-  font-size: 2.4rem;
+  font-size: 2rem;
 }
 
 .heroi-lide {
@@ -235,49 +239,30 @@ label {
   gap: 0.75rem 1.5rem;
 }
 
-/* Quadro com borda grossa, lembrando uma placa */
-.placa {
-  padding: 1.25rem 1.5rem 0.75rem;
-  border: 2px solid var(--tinta);
-  background-color: var(--papel);
-}
-
-.placa h2 {
-  font-size: 1.05rem;
-}
-
-.placa ul {
+/* Print real da página Relatar, com a legenda embaixo da imagem */
+.heroi-imagem {
   margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
-.placa li {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.55rem 0;
-  border-top: 1px solid var(--linha);
-  font-weight: 600;
+.heroi-imagem img {
+  display: block;
+  width: 220px;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--tinta);
+  border-radius: var(--raio);
 }
 
-.placa li::before {
-  content: "";
-  flex-shrink: 0;
-  width: 0.6rem;
-  height: 0.6rem;
-  background-color: var(--sinal);
-  outline: 1px solid var(--tinta);
-}
-
-.problema {
-  display: grid;
-  gap: 1.5rem;
+.heroi-imagem figcaption {
+  margin-top: 0.5rem;
+  color: var(--texto-suave);
+  font-size: 0.85rem;
 }
 
 /* Número em destaque com a fonte do dado */
 .numero {
-  margin: 0;
+  max-width: 46ch;
+  margin: 1.5rem 0 0;
   padding-left: 1rem;
   border-left: 6px solid var(--sinal);
   color: var(--texto-suave);
@@ -293,46 +278,33 @@ label {
   font-variant-numeric: tabular-nums;
 }
 
-/* Cards do Bootstrap ("Como funciona") seguindo as cores do site */
-.card {
-  color: var(--tinta);
+/* "Como funciona": linhas do grid do Bootstrap separadas por traços */
+.passo {
+  padding: 1rem 0;
+  border-top: 1px solid var(--linha-forte);
 }
 
-.card-text {
+.passo:last-child {
+  border-bottom: 1px solid var(--linha-forte);
+}
+
+.passo h3 {
+  margin: 0 0 0.25rem;
+}
+
+.passo p {
+  max-width: 60ch;
+  margin: 0;
   color: var(--texto-suave);
 }
 
 /* ---------- 6. Página Sobre ---------- */
-.lista-ods {
-  display: grid;
-  gap: 1.5rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.lista-simples {
+  padding-left: 1.2rem;
 }
 
-.lista-ods li {
-  padding-top: 0.75rem;
-  border-top: 6px solid var(--tinta);
-}
-
-/* Cores oficiais de cada ODS (ONU) */
-.lista-ods li.ods-9 { border-top-color: #fd6925; }
-.lista-ods li.ods-11 { border-top-color: #fd9d24; }
-.lista-ods li.ods-16 { border-top-color: #00689d; }
-
-.lista-ods p {
-  margin: 0;
-  color: var(--texto-suave);
-}
-
-.ods-numero {
-  display: block;
-  margin-bottom: 0.25rem;
-  color: var(--texto-suave);
-  font-size: 0.85rem;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
+.lista-simples li {
+  margin-bottom: 0.5rem;
 }
 
 .lista-definicoes {
@@ -369,8 +341,13 @@ label {
   font-weight: 700;
   line-height: 1.2;
   text-decoration: none;
+  white-space: nowrap;         /* o texto do botão não quebra linha */
   cursor: pointer;
-  transition: background-color 0.12s, color 0.12s;
+}
+
+/* Ao clicar, o botão "afunda" 1px */
+.botao:active {
+  transform: translateY(1px);
 }
 
 .botao-primario {
@@ -448,6 +425,12 @@ fieldset.campo {
   background-color: var(--papel);
   font: inherit;
   color: inherit;
+}
+
+/* Texto de exemplo com contraste suficiente para ler */
+.controle::placeholder {
+  color: #6e6e69;
+  opacity: 1;
 }
 
 /* Foco do campo: contorno preto com uma "aura" amarela */
@@ -559,9 +542,9 @@ textarea.controle {
 .contador {
   min-width: 1.9rem;
   padding: 0.1rem 0.45rem;
-  border-radius: 3px;
+  border-radius: var(--raio);
   background-color: var(--tinta);
-  color: #ffffff;
+  color: var(--claro);
   font-size: 0.9rem;
   letter-spacing: 0;
   text-align: center;
@@ -633,28 +616,15 @@ textarea.controle {
 
 /* Etiquetas de gravidade e de status */
 .etiqueta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
   font-size: 0.8rem;
   font-weight: 700;
   white-space: nowrap;
 }
 
-/* Gravidade: bolinha colorida + texto (a cor nunca é a única informação) */
+/* Gravidade: texto colorido (a cor nunca é a única informação) */
 .gravidade-baixa { color: #1d7a3a; }
 .gravidade-media { color: #8a5a00; }
 .gravidade-alta { color: #b3261e; }
-
-.gravidade-baixa::before,
-.gravidade-media::before,
-.gravidade-alta::before {
-  content: "";
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 50%;
-  background-color: currentColor;
-}
 
 /* Status: selo com borda, em letras maiúsculas pequenas */
 .status-aberto,
@@ -662,7 +632,7 @@ textarea.controle {
 .status-resolvido {
   padding: 0.1rem 0.45rem;
   border: 1px solid currentColor;
-  border-radius: 3px;
+  border-radius: var(--raio);
   font-size: 0.72rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -673,15 +643,19 @@ textarea.controle {
 .status-resolvido { color: var(--sucesso); }
 
 /* ---------- 10. Registro de atividades ---------- */
+.area-registro {
+  padding-top: 1rem;
+  border-top: 2px solid var(--tinta);
+}
+
 .registro {
   max-height: 280px;
   margin: 0;
   padding: 0;
   overflow-y: auto;
   list-style: none;
-  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  font-size: 0.82rem;
-  font-variant-numeric: tabular-nums;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;   /* números alinhados na data e hora */
 }
 
 .registro li {
@@ -709,14 +683,6 @@ textarea.controle {
   margin: 0;
 }
 
-/* Quem pede menos movimento no sistema não recebe transições */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
-}
-
 /* ==========================================================
    12. TABLET (a partir de 768px)
    ========================================================== */
@@ -729,11 +695,12 @@ textarea.controle {
     flex-direction: row;               /* logo à esquerda, menu à direita */
     align-items: center;
     justify-content: space-between;
+    min-height: 64px;
     padding-top: 0;
   }
 
   .heroi h1 {
-    font-size: 3.2rem;
+    font-size: 3rem;
   }
 
   .linha-campos {
@@ -742,10 +709,6 @@ textarea.controle {
 
   .lista-ocorrencias {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .lista-ods {
-    grid-template-columns: repeat(3, 1fr);
   }
 
   .lista-definicoes div {
@@ -759,20 +722,18 @@ textarea.controle {
    ========================================================== */
 @media (min-width: 1024px) {
   .heroi {
-    grid-template-columns: 7fr 4fr;    /* texto maior à esquerda, placa à direita */
-    align-items: end;
-    gap: 3rem;
-    padding: 2rem 0 3.5rem;
+    grid-template-columns: 1fr auto;   /* texto à esquerda, print à direita */
+    align-items: center;
+    gap: 4rem;
+    padding: 1.5rem 0 3rem;
   }
 
   .heroi h1 {
-    font-size: 3.6rem;
+    font-size: 3.4rem;
   }
 
-  .problema {
-    grid-template-columns: 7fr 4fr;
-    align-items: start;
-    gap: 3rem;
+  .heroi-imagem img {
+    width: 300px;
   }
 
   .layout-relatar {
