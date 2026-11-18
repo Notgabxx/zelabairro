@@ -1,5 +1,7 @@
 # ZelaBairro
 
+**Site no ar:** https://notgabxx.github.io/zelabairro/
+
 Site para relatar problemas de zeladoria do bairro (buraco na rua, poste apagado, lixo acumulado, calçada quebrada) e acompanhar a solução.
 
 Protótipo da atividade **Tecnologia Cidadã** de Desenvolvimento Web I (Fatec Diadema).
@@ -36,6 +38,8 @@ Juntar em um só lugar os relatos de problemas de rua, organizados por tipo, bai
 - Git e GitHub
 
 ## Como executar
+
+Para usar online, é só abrir https://notgabxx.github.io/zelabairro/. Para rodar no computador:
 
 1. Clone o repositório:
    ```bash
