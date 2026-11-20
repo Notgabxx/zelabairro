@@ -57,6 +57,7 @@ zelabairro/
 ├── index.html          # Início: problema e "Como funciona" (Bootstrap)
 ├── relatar.html        # Formulário, lista de ocorrências e registro de atividades
 ├── sobre.html          # Cidadão, ODS, modelo de negócio e privacidade
+├── _headers            # Cabeçalhos de segurança (Cloudflare Pages)
 ├── css/
 │   └── style.css       # Estilos próprios (Mobile First, Flexbox e Grid)
 ├── js/
@@ -94,6 +95,7 @@ Cada ocorrência é um objeto guardado em JSON no `localStorage` (chave `zelabai
 - Mensagens de erro sem detalhes técnicos (ex.: "Não foi possível carregar os dados. Tente novamente."); o detalhe vai só para o console
 - Coleta mínima de dados (LGPD): o formulário não pede nome, CPF, telefone nem e-mail e tem um aviso de privacidade
 - Bootstrap carregado com SRI (`integrity`): se o arquivo for alterado na CDN, o navegador bloqueia
+- Cabeçalhos de segurança no arquivo `_headers` (Content-Security-Policy, `nosniff`, bloqueio de iframe), aplicados quando o site roda na Cloudflare Pages: um script injetado na página é bloqueado pelo navegador
 - Nenhuma senha, chave ou segredo no repositório
 
 ## Prints
